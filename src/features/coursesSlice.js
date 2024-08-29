@@ -2,14 +2,14 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
 
-export const fetchCourses = createAsyncThunk('courses/fetchCourse', async () =>{
-    const res = await axios.get('http://localhost:5000/allCourse');
+export const fetchCourses = createAsyncThunk('courses/fetchCourse', async (search='') =>{
+    const res = await axios.get(`http://localhost:5000/allCourse?search=${search}`);
 
     return res.data;
 })
 
-export const fetchCourseDetails = createAsyncThunk('courses/fetchCourseDetails', async (courseId) => {
-    const response = await axios.get(`/api/courses/${courseId}`);
+export const fetchCourseDetails = createAsyncThunk('courses/fetchCourseDetails', async (id) => {
+    const response = await axios.get(`http://localhost:5000/courses/${id}`);
     return response.data;
   });
 
