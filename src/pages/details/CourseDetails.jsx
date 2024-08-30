@@ -2,6 +2,9 @@ import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { fetchCourseDetails } from '../../features/coursesSlice';
+import { loadUserInfo } from '../../utils/loadUserInfo';
+import axios from 'axios';
+import Swal from 'sweetalert2';
 
 const CourseDetails = () => {
     const { id } = useParams();
@@ -11,6 +14,32 @@ const CourseDetails = () => {
     useEffect(() => {
         dispatch(fetchCourseDetails(id));
     }, [id, dispatch]);
+
+
+    const user = loadUserInfo();
+    const handleEnroll = async () => {
+        const res = await axios.put('http://localhost:5000/enroll', { email: user.email, id });
+
+        console.log(res.data);
+
+        if (res.data.result) {
+
+            Swal.fire({
+                position: "top-center",
+                icon: "success",
+                title: `You have successfully enroll ${name}`,
+                showConfirmButton: false,
+                timer: 1500
+            });
+
+        } else {
+            Swal.fire({
+                icon: "error",
+                title: "Oops...",
+                text: "You already enrolled in this course !",
+            });
+        }
+    }
 
     return (
         <div className="p-5 mx-auto sm:p-10 md:p-16 bg-gray-100 text-gray-800">
@@ -47,6 +76,7 @@ const CourseDetails = () => {
                         <h3 className='font-medium'>Schedule : <span>{schedule}</span></h3>
                         <h3 className='font-medium'>Course Fee : $<span>{price}</span></h3>
                     </div>
+                    <button onClick={handleEnroll} className='rounded py-2 w-full bg-gradient-to-r from-orange-500  to-yellow-400 text-white font-semibold'>Enroll Course</button>
                 </div>
             </div>
         </div>
