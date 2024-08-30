@@ -2,8 +2,20 @@
 import { useState } from 'react';
 import { Link, NavLink, useNavigate } from 'react-router-dom';
 import Dropdown from './Dropdown';
+import { useSelector } from 'react-redux';
+import { loadUserInfo } from '../utils/loadUserInfo';
 
 const Navbar = () => {
+
+    // const loginInfo = useSelector((state) => state.auth.loginInfo);
+    // console.log('loginInfo = ', loginInfo);
+    // console.log('user = ', loginInfo.user);
+
+    // const {user} = loginInfo;
+
+    const user = loadUserInfo();
+
+
 
     const navigate = useNavigate();
 
@@ -92,13 +104,13 @@ const Navbar = () => {
                             </NavLink>
 
 
-                            
+
                         </div>
 
                         <div className="flex justify-center mt-6 lg:flex lg:mt-0 lg:-mx-2">
-                            {/* {
+                            {
                                 user ? <Dropdown />
-                                    :  */}
+                                    :
                                     <Link to={'/login'} className="relative inline-flex items-center justify-start py-3 pl-4 pr-12 overflow-hidden font-semibold text-orange-400 transition-all duration-150 ease-in-out rounded hover:pl-10 hover:pr-6 bg-gray-50 group">
                                         <span className="absolute bottom-0 left-0 w-full h-1 transition-all duration-150 ease-in-out bg-gradient-to-r from-orange-500  to-yellow-400 group-hover:h-full"></span>
                                         <span className="absolute right-0 pr-4 duration-200 ease-out group-hover:translate-x-12">
@@ -109,7 +121,7 @@ const Navbar = () => {
                                         </span>
                                         <span className="relative w-full text-left transition-colors duration-200 ease-in-out group-hover:text-white">Login</span>
                                     </Link>
-                            {/* } */}
+                            }
                         </div>
                     </div>
                 </div>

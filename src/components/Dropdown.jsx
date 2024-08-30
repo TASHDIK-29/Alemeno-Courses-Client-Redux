@@ -1,10 +1,11 @@
 import { useState, useEffect, useRef } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { FaArrowRightFromBracket } from "react-icons/fa6";
+import { loadUserInfo } from '../utils/loadUserInfo';
 
 const Dropdown = () => {
 
-
+    const user = loadUserInfo();
 
     const navigate = useNavigate();
 
@@ -26,6 +27,10 @@ const Dropdown = () => {
 
 
     const handelLogout = () => {
+        localStorage.removeItem('token');
+        localStorage.removeItem('credential');
+        localStorage.removeItem('user');
+
 
         navigate('/');
     }
@@ -37,7 +42,7 @@ const Dropdown = () => {
                 onClick={() => setIsOpen(!isOpen)}
                 className="relative z-10 flex items-center p-2 text-sm  border border-transparent rounded-md text-white focus:outline-none bg-gradient-to-r from-orange-500  to-yellow-400"
             >
-                <span className="mx-1">Name</span>
+                <span className="mx-1">{user?.firstName}</span>
                 <svg
                     className="w-5 h-5 mx-1"
                     viewBox="0 0 24 24"
@@ -66,8 +71,8 @@ const Dropdown = () => {
                             alt='image'
                         />
                         <div className="mx-1">
-                            <h1 className="text-sm font-semibold text-black">Name</h1>
-                            <p className="text-sm text-black">Email</p>
+                            <h1 className="text-sm font-semibold text-black">{user?.firstName}</h1>
+                            <p className="text-sm text-black">{user?.email}</p>
                         </div>
                     </div>
 

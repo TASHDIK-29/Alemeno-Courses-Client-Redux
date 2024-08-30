@@ -1,12 +1,15 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from 'react-redux';
 import { createUser } from "../../features/authSlice";
+import Swal from "sweetalert2";
 
 const Register = () => {
 
     const dispatch = useDispatch();
     const registerInfo = useSelector((state) => state.auth.registerInfo);
+
+    const navigate = useNavigate();
 
     useEffect(() => {
         window.scroll(0, 0);
@@ -39,18 +42,18 @@ const Register = () => {
         dispatch(createUser(userInfo))
 
 
-        // if (res.data.insertedId) {
+        if (registerInfo.insertedId) {
 
-        //     Swal.fire({
-        //         position: "top-center",
-        //         icon: "success",
-        //         title: "You have successfully create an account",
-        //         showConfirmButton: false,
-        //         timer: 1500
-        //     });
+            Swal.fire({
+                position: "top-center",
+                icon: "success",
+                title: "You have successfully create an account",
+                showConfirmButton: false,
+                timer: 1500
+            });
 
-        //     navigate('/login');
-        // }
+            navigate('/login');
+        }
 
 
     }
