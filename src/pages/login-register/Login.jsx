@@ -1,14 +1,19 @@
 import { useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from 'react-redux';
+import { loginUser } from "../../features/authSlice";
 
 const Login = () => {
+
+    const dispatch = useDispatch();
+    const loginInfo = useSelector((state) => state.auth.loginInfo);
 
     useEffect(() => {
         window.scroll(0, 0);
     }, []);
 
 
-
+    const navigate = useNavigate();
 
     const handelLogin = async e => {
         e.preventDefault();
@@ -18,8 +23,20 @@ const Login = () => {
         const email = form.email.value;
         const password = form.password.value;
 
-        console.log(email, password);
 
+        dispatch(loginUser({ email, password }))
+
+        if (!loginInfo.user) {
+            return alert('User not registered')
+        } else if (loginInfo.user && !loginInfo.password) {
+            return alert('Invalid Password')
+        }
+
+        localStorage.setItem('token', loginInfo.token);
+        localStorage.setItem('credential', email);
+        localStorage.setItem('user', JSON.stringify(loginInfo.user));
+
+        navigate('/');
 
 
     }
@@ -27,7 +44,7 @@ const Login = () => {
 
     return (
         <div className="min-h-[70vh] flex justify-center items-center ">
-            
+
             <div className="space-y-4 lg:w-1/2">
                 <h1 className="text-4xl font-bold">Login To Your Account</h1>
                 <p>Have no account with us ? please <Link to={'/register'} className="text-left font-bold text-orange-400 text-lg"><span>Register</span></Link> now.</p>
