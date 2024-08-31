@@ -2,6 +2,7 @@ import { useState, useEffect, useRef } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { FaArrowRightFromBracket } from "react-icons/fa6";
 import { loadUserInfo } from '../utils/loadUserInfo';
+import placeholderImage from "../assets/placeholderImg.jpg"
 
 const Dropdown = () => {
 
@@ -67,7 +68,7 @@ const Dropdown = () => {
                     >
                         <img
                             className="flex-shrink-0 object-cover mx-1 rounded-full w-9 h-9"
-                            src={''}
+                            src={user?.image ? user.image : placeholderImage}
                             alt='image'
                         />
                         <div className="mx-1">
@@ -79,26 +80,13 @@ const Dropdown = () => {
                     <hr className="border-gray-400" />
 
                     <Link
-                        to={'/profile'}
+                        to={'/dashboard/profile'}
                         onClick={() => setIsOpen(!isOpen)}
                         className="block px-4 py-3 text-sm capitalize transition-colors duration-300 transform text-black font-medium hover:bg-gray-300 hover:text-black w-full text-start"
                     >
-                        View Profile
+                        Dashboard
                     </Link>
-                    <button
-                        onClick={() => setIsOpen(!isOpen)}
-                        className="block px-4 py-3 text-sm capitalize transition-colors duration-300 transform text-black font-medium hover:bg-gray-300 hover:text-black w-full text-start"
-                    >
-                        Cart
-                    </button>
-
-                    <Link
-                        to={'/orders'}
-                        onClick={() => setIsOpen(!isOpen)}
-                        className="block px-4 py-3 text-sm capitalize transition-colors duration-300 transform text-black font-medium hover:bg-gray-300 hover:text-black w-full text-start"
-                    >
-                        Order History
-                    </Link>
+                    
 
                     <hr className="border-gray-400" />
 
