@@ -32,12 +32,12 @@ console.log('user = ', user);
         if (imageURL) {
 
             try {
-                const { data } = await axios.put(`http://localhost:5000/users/image/${storedUser.email}`, { imageURL })
+                const { data } = await axios.put(`http://localhost:5000/users/image/${storedUser?.email}`, { imageURL })
 
                 console.log(data);
 
                 if (data.modifiedCount) {
-                    dispatch(fetchUser(storedUser.email))
+                    dispatch(fetchUser(storedUser?.email))
 
                     Swal.fire({
                         position: "top-center",

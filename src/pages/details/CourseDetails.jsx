@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { fetchCourseDetails } from '../../features/coursesSlice';
 import { loadUserInfo } from '../../utils/loadUserInfo';
 import axios from 'axios';
@@ -8,6 +8,7 @@ import Swal from 'sweetalert2';
 
 const CourseDetails = () => {
     const { id } = useParams();
+    const navigate = useNavigate();
     const dispatch = useDispatch();
     const { price, syllabus, prerequisites, location, schedule, duration, thumbnail, enrollmentStatus, description, instructor, name, _id } = useSelector((state) => state.courses.details);
 
@@ -18,6 +19,16 @@ const CourseDetails = () => {
 
     const user = loadUserInfo();
     const handleEnroll = async () => {
+        if (!user) {
+            Swal.fire({
+                icon: "error",
+                title: "Oops...",
+                text: "You hav to login first!",
+            });
+
+            navigate('/login')
+
+        }
         const res = await axios.put('http://localhost:5000/enroll', { email: user.email, id });
 
         console.log(res.data);

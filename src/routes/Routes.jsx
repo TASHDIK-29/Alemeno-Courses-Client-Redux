@@ -7,6 +7,7 @@ import Login from "../pages/login-register/Login";
 import DashboardLayout from "../layout/DashboardLayout";
 import UserProfile from "../pages/dashboard/profile/UserProfile";
 import EnrollCourses from "../pages/dashboard/EnrollCourses";
+import PrivateRoute from "./PrivateRoute";
 
 
 export const router = createBrowserRouter([
@@ -34,15 +35,15 @@ export const router = createBrowserRouter([
     },
     {
       path: "dashboard",
-      element: <DashboardLayout />,
+      element: <PrivateRoute><DashboardLayout /></PrivateRoute>,
       children:[
         {
           path: "profile",
-          element: <UserProfile />
+          element: <PrivateRoute><UserProfile /></PrivateRoute>
         },
         {
           path: "allCourses",
-          element: <EnrollCourses />
+          element: <PrivateRoute><EnrollCourses /></PrivateRoute>
         },
       ]
     }

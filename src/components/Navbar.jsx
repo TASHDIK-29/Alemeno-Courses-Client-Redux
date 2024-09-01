@@ -78,30 +78,7 @@ const Navbar = () => {
                             }`}
                     >
                         <div className="flex flex-col capitalize text-white font-semibold lg:flex lg:pl-16 lg:-mx-4 lg:flex-row lg:items-center lg:justify-center w-10/12 lg:gap-6">
-                            <NavLink
-                                to={'/cloths'}
-                                className={({ isActive }) => isActive ? 'text-base font-bold my-3 bg-300% bg-gradient-to-r from-orange-500  to-yellow-400 text-transparent bg-clip-text animate-gradient' : 'text-base text-white my-3'}
-                            >
-                                Cloths
-                            </NavLink>
-                            <NavLink
-                                to={'/gadgets'}
-                                className={({ isActive }) => isActive ? 'text-base font-bold my-3 bg-300% bg-gradient-to-r from-orange-500  to-yellow-400 text-transparent bg-clip-text animate-gradient' : 'text-base text-white my-3'}
-                            >
-                                Gadgets
-                            </NavLink>
-                            <NavLink
-                                to={'/toys'}
-                                className={({ isActive }) => isActive ? 'text-base font-bold my-3 bg-300% bg-gradient-to-r from-orange-500  to-yellow-400 text-transparent bg-clip-text animate-gradient' : 'text-base text-white my-3'}
-                            >
-                                Toys
-                            </NavLink>
-                            <NavLink
-                                to={'/furniture'}
-                                className={({ isActive }) => isActive ? 'text-base font-bold my-3 bg-300% bg-gradient-to-r from-orange-500  to-yellow-400 text-transparent bg-clip-text animate-gradient' : 'text-base text-white my-3'}
-                            >
-                                Furniture
-                            </NavLink>
+                            
 
 
 

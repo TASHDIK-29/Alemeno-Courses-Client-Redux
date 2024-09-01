@@ -2,7 +2,7 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
 
-export const fetchCourses = createAsyncThunk('courses/fetchCourse', async (search='') =>{
+export const fetchCourses = createAsyncThunk('courses/fetchCourse', async (search = '') => {
     const res = await axios.get(`http://localhost:5000/allCourse?search=${search}`);
 
     return res.data;
@@ -11,12 +11,19 @@ export const fetchCourses = createAsyncThunk('courses/fetchCourse', async (searc
 export const fetchCourseDetails = createAsyncThunk('courses/fetchCourseDetails', async (id) => {
     const response = await axios.get(`http://localhost:5000/courses/${id}`);
     return response.data;
+});
+
+
+// Thunk for updating course likes
+export const updateCourseLikes = createAsyncThunk('courses/updateCourseLikes', async (courseId) => {
+    const response = await axios.patch(`http://localhost:5000/course/like/${courseId}`);
+    return response.data;
   });
 
 
 const initialState = {
     list: [],
-    details:{},
+    details: {},
     status: 'idle',
     error: null
 }
@@ -27,20 +34,27 @@ const coursesSlice = createSlice({
     reducers: {},
     extraReducers: (builder) => {
         builder
-        .addCase(fetchCourses.pending, (state) => {
-            state.status = 'loading';
-        })
-        .addCase(fetchCourses.fulfilled, (state, action) =>{
-            state.status = 'succeeded';
-            state.list = action.payload;
-        })
-        .addCase(fetchCourses.rejected, (state, action) =>{
-            state.status = 'failed';
-            state.error = action.error.message;
-        })
-        .addCase(fetchCourseDetails.fulfilled, (state, action) => {
-            state.details = action.payload;
-          })
+            .addCase(fetchCourses.pending, (state) => {
+                state.status = 'loading';
+            })
+            .addCase(fetchCourses.fulfilled, (state, action) => {
+                state.status = 'succeeded';
+                state.list = action.payload;
+            })
+            .addCase(fetchCourses.rejected, (state, action) => {
+                state.status = 'failed';
+                state.error = action.error.message;
+            })
+            .addCase(fetchCourseDetails.fulfilled, (state, action) => {
+                state.details = action.payload;
+            })
+            .addCase(updateCourseLikes.fulfilled, (state, action) => {
+                const updatedCourse = action.payload;
+                const existingCourse = state.list.find(course => course._id === updatedCourse._id);
+                if (existingCourse) {
+                  existingCourse.likes = updatedCourse.likes;
+                }
+              });
     }
 })
 
