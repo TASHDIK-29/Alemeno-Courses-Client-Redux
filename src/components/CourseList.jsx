@@ -27,10 +27,10 @@ const CourseList = () => {
             <div className="container grid grid-cols-12 mx-auto">
                 <div className="flex flex-col justify-center col-span-12 align-middle lg:col-span-6 ">
                     <div className="text-center">
-                        <h1 className="text-3xl font-semibold text-gray-800  lg:text-4xl">Create beautiful website layout with Meraki UI.</h1>
+                        <h1 className="text-3xl font-semibold text-gray-800  lg:text-4xl">Empower Your Tech Journey with ALEMENO</h1>
 
                         <p className="mt-6 text-gray-500 ">
-                            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Libero similique obcaecati illum mollitia.
+                        Dive into our expertly crafted courses and unlock the skills you need to thrive in the digital world.
                         </p>
 
                         <div className="w-full max-w-sm mx-auto mt-6 bg-transparent border rounded-md border-gray-700  focus-within:ring focus-within:ring-orange-300 focus-within:border-orange-300 focus-within:ring-opacity-40">
@@ -46,9 +46,12 @@ const CourseList = () => {
                     {
                         courses.map(course => (
                             <div key={course._id} className="pt-6 pb-4 space-y-2">
-                                <span>{course?.location}</span>
+                                <span className='py-1 px-2 rounded-md bg-green-400 text-white font-semibold'>{course?.location}</span>
                                 <h1 className="text-3xl font-bold">{course?.name}</h1>
-                                <p>{course?.instructor}</p>
+                                <div className='flex items-center gap-3'>
+                                    <img src={course?.instructorImg} className='w-10 h-10 rounded-full' alt="" />
+                                    <p className='font-semibold'>{course?.instructor}</p>
+                                </div>
                                 <div className='flex justify-between items-center'>
                                     <Link to={`/course/${course._id}`} rel="noopener noreferrer" href="#" className="inline-flex items-center py-2 space-x-2 text-sm text-orange-600">
                                         <span>Details</span>

@@ -10,7 +10,7 @@ const CourseDetails = () => {
     const { id } = useParams();
     const navigate = useNavigate();
     const dispatch = useDispatch();
-    const { price, syllabus, prerequisites, location, schedule, duration, thumbnail, enrollmentStatus, description, instructor, name, _id } = useSelector((state) => state.courses.details);
+    const { price, syllabus, prerequisites, location, schedule, duration, thumbnail, enrollmentStatus, description, instructor, name, instructorImg, instructorStatus, _id } = useSelector((state) => state.courses.details);
 
     useEffect(() => {
         dispatch(fetchCourseDetails(id));
@@ -55,15 +55,18 @@ const CourseDetails = () => {
     return (
         <div className="p-5 mx-auto sm:p-10 md:p-16 bg-gray-100 text-gray-800">
             <div className="flex flex-col max-w-3xl mx-auto overflow-hidden rounded">
-                <img src="https://img.freepik.com/free-vector/hand-drawn-flat-design-sql-illustration_23-2149243381.jpg?uid=R141467370&ga=GA1.1.221420494.1715600354&semt=ais_hybrid" alt="" className="w-full h-60 sm:h-96 bg-gray-500" />
+                <img src={thumbnail} alt="" className="w-full h-60 sm:h-96 bg-gray-500" />
                 <div className="p-6 pb-12 m-4 mx-auto -mt-16 space-y-6 lg:max-w-2xl sm:px-10 sm:mx-12 lg:rounded-md bg-gray-50">
                     <div className="space-y-2 grid grid-cols-6">
-                        <div className='col-span-5'>
+                        <div className='col-span-6 lg:col-span-5'>
                             <h1 rel="noopener noreferrer" className="inline-block text-2xl font-semibold sm:text-3xl">{name}</h1>
-                            <p className="text-xs text-gray-600">By {instructor}</p>
+                            <div className='flex items-center gap-3'>
+                                <img src={instructorImg} className='w-10 h-10 rounded-full' alt="" />
+                                <p className='font-semibold'>{instructor} <span>({instructorStatus})</span></p>
+                            </div>
                         </div>
-                        <div>
-                            <h3 className='py-1 px-2 rounded-md bg-green-400 mx-4 text-white font-semibold'>{location}</h3>
+                        <div className='col-span-2 lg:col-span-1'>
+                            <h3 className='py-1 px-2 rounded-md bg-green-400 text-white font-semibold text-center'>{location}</h3>
                         </div>
                     </div>
                     <div className="text-gray-800">

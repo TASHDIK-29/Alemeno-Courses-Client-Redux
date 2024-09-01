@@ -62,7 +62,7 @@ console.log('user = ', user);
             
             <div className="  mx-auto">
                 <h1 className="text-2xl font-semibold text-gray-800 capitalize lg:text-3xl ">
-                    Hello, {storedUser?.firstName}
+                    Hello, {user?.firstName}
                 </h1>
 
                 <div className="mt-2">
@@ -84,13 +84,13 @@ console.log('user = ', user);
                             <h2 className="text-2xl font-semibold">Your Information</h2>
                             <ul className="flex flex-col pt-4 space-y-2">
                                 <li className="flex items-start justify-between">
-                                    <h3>Name : {storedUser?.firstName} {storedUser?.lastName}</h3>
+                                    <h3>Name : {user?.firstName} {user?.lastName}</h3>
                                 </li>
                                 <li className="flex items-start justify-between">
-                                    <h3>Email : {storedUser?.email}</h3>
+                                    <h3>Email : {user?.email}</h3>
                                 </li>
                                 <li className="flex items-start justify-between">
-                                    <h3>Phone : {storedUser?.phone}</h3>
+                                    <h3>Phone : {user?.phone}</h3>
                                 </li>
                             </ul>
                             <div className="pt-4 space-y-2">
@@ -98,12 +98,12 @@ console.log('user = ', user);
                                     <h3>Role : User</h3>
                                 </li>
                                 <li className="flex items-start justify-between">
-                                    <h3>storedUser ID : {storedUser?._id}</h3>
+                                    <h3>User ID : {user?._id}</h3>
                                 </li>
                             </div>
                             <div className="pt-4 space-y-2">
                                 <li className="flex items-start justify-between">
-                                    <h3>Total Enrolled : <span className="uppercase">{storedUser?.enrolled}</span></h3>
+                                    <h3>Total Enrolled : <span className="uppercase">{user?.enrolled}</span></h3>
                                 </li>
                             </div>
 

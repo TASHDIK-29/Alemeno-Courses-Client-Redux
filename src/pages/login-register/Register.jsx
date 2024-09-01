@@ -3,6 +3,7 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from 'react-redux';
 import { createUser } from "../../features/authSlice";
 import Swal from "sweetalert2";
+import toast from "react-hot-toast";
 
 const Register = () => {
 
@@ -14,10 +15,22 @@ const Register = () => {
     useEffect(() => {
         window.scroll(0, 0);
 
-        
-    }, []);
+        if (registerInfo.insertedId) {
 
-    console.log('reg = ', registerInfo);
+            Swal.fire({
+                position: "top-center",
+                icon: "success",
+                title: "You have successfully create an account",
+                showConfirmButton: false,
+                timer: 1500
+            });
+
+            navigate('/login');
+        }else{
+            toast.error("Email Already Used. Try another")
+        }
+
+    }, [registerInfo]);
 
 
 
@@ -37,24 +50,7 @@ const Register = () => {
             firstName, lastName, email, phone, password
         }
 
-        console.log(userInfo);
-
         dispatch(createUser(userInfo))
-
-
-        if (registerInfo.insertedId) {
-
-            Swal.fire({
-                position: "top-center",
-                icon: "success",
-                title: "You have successfully create an account",
-                showConfirmButton: false,
-                timer: 1500
-            });
-
-            navigate('/login');
-        }
-
 
     }
 
@@ -62,7 +58,7 @@ const Register = () => {
 
     return (
         <div className="space-y-4">
-            
+
             <h1 className="text-4xl font-bold">Register Your Account</h1>
             <p>If you have an account with us, please login at the <Link to={'/login'} className="text-orange-400 font-bold text-lg">Login</Link> page</p>
             <div className="space-y-2">

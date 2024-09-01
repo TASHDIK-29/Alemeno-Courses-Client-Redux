@@ -54,14 +54,14 @@ const EnrollCourses = () => {
                             <div key={course._id} >
                                 <div>
                                     <div className="relative">
-                                        <img className="object-cover object-center w-full h-64 rounded-lg lg:h-80" src="https://images.unsplash.com/photo-1624996379697-f01d168b1a52?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80" alt="" />
+                                        <img className="object-cover object-center w-full h-64 rounded-lg lg:h-80" src={course?.thumbnail} alt="" />
 
                                         <div className="absolute bottom-0 flex p-3 bg-white  ">
-                                            <img className="object-cover object-center w-10 h-10 rounded-full" src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80" alt="" />
+                                            <img className="object-cover object-center w-10 h-10 rounded-full" src={course?.instructorImg} alt="" />
 
                                             <div className="mx-4">
                                                 <h1 className="text-sm text-gray-700 ">{course?.instructor}</h1>
-                                                <p className="text-sm text-gray-500 ">Creative Director</p>
+                                                <p className="text-sm text-gray-500 ">{course?.instructorStatus}</p>
                                             </div>
                                         </div>
                                     </div>

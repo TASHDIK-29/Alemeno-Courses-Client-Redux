@@ -1,45 +1,50 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from 'react-redux';
-import { loginUser } from "../../features/authSlice";
+import { clearLoginInfo, loginUser } from "../../features/authSlice";
+import toast from "react-hot-toast";
 
 const Login = () => {
 
     const dispatch = useDispatch();
     const loginInfo = useSelector((state) => state.auth.loginInfo);
+    const navigate = useNavigate();
+    const [isLoggingIn, setIsLoggingIn] = useState(false);
+
 
     useEffect(() => {
         window.scroll(0, 0);
-    }, []);
 
+        if (isLoggingIn) {
+            if (loginInfo.token) {
+                localStorage.setItem('token', loginInfo.token);
+                localStorage.setItem('credential', loginInfo.user.email); // Save the email from loginInfo
+                localStorage.setItem('user', JSON.stringify(loginInfo.user));
 
-    const navigate = useNavigate();
+                navigate('/');
+            } else if (loginInfo.user && !loginInfo.token) {
+                toast.error('Invalid Password!');
+            } else if (loginInfo.error) {
+                toast.error(`Invalid credentials: ${loginInfo.error}`);
+            }
+        }
 
-    const handelLogin = async e => {
+    }, [loginInfo, navigate]);
+
+    const handelLogin = async (e) => {
         e.preventDefault();
 
         const form = e.target;
-
         const email = form.email.value;
         const password = form.password.value;
 
+        setIsLoggingIn(true);
 
-        dispatch(loginUser({ email, password }))
+        // Dispatch the login action with the email and password
+        dispatch(loginUser({ email, password }));
 
-        if (!loginInfo.user) {
-            return alert('User not registered')
-        } else if (loginInfo.user && !loginInfo.password) {
-            return alert('Invalid Password')
-        }
+    };
 
-        localStorage.setItem('token', loginInfo.token);
-        localStorage.setItem('credential', email);
-        localStorage.setItem('user', JSON.stringify(loginInfo.user));
-
-        navigate('/');
-
-
-    }
 
 
     return (
