@@ -29,7 +29,7 @@ const CourseDetails = () => {
             navigate('/login')
 
         }
-        const res = await axios.put('http://localhost:5000/enroll', { email: user.email, id });
+        const res = await axios.put('https://alemeno-course-server.vercel.app/enroll', { email: user.email, id });
 
         console.log(res.data);
 

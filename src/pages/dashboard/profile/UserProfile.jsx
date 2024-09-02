@@ -32,7 +32,7 @@ console.log('user = ', user);
         if (imageURL) {
 
             try {
-                const { data } = await axios.put(`http://localhost:5000/users/image/${storedUser?.email}`, { imageURL })
+                const { data } = await axios.put(`https://alemeno-course-server.vercel.app/users/image/${storedUser?.email}`, { imageURL })
 
                 console.log(data);
 

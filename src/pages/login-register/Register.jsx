@@ -1,5 +1,5 @@
 import { Link, useNavigate } from "react-router-dom";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from 'react-redux';
 import { createUser } from "../../features/authSlice";
 import Swal from "sweetalert2";
@@ -9,25 +9,27 @@ const Register = () => {
 
     const dispatch = useDispatch();
     const registerInfo = useSelector((state) => state.auth.registerInfo);
-
+    const [isRegistering, setIsRegistering] = useState(false);
     const navigate = useNavigate();
 
     useEffect(() => {
         window.scroll(0, 0);
 
-        if (registerInfo.insertedId) {
+        if (isRegistering) {
+            if (registerInfo.insertedId) {
 
-            Swal.fire({
-                position: "top-center",
-                icon: "success",
-                title: "You have successfully create an account",
-                showConfirmButton: false,
-                timer: 1500
-            });
+                Swal.fire({
+                    position: "top-center",
+                    icon: "success",
+                    title: "You have successfully create an account",
+                    showConfirmButton: false,
+                    timer: 1500
+                });
 
-            navigate('/login');
-        }else{
-            toast.error("Email Already Used. Try another")
+                navigate('/login');
+            } else {
+                toast.error("This email already been registered.")
+            }
         }
 
     }, [registerInfo]);
@@ -49,6 +51,8 @@ const Register = () => {
         const userInfo = {
             firstName, lastName, email, phone, password
         }
+
+        setIsRegistering(true);
 
         dispatch(createUser(userInfo))
 

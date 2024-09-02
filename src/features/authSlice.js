@@ -3,13 +3,13 @@ import axios from "axios";
 
 
 export const createUser = createAsyncThunk('auth/createUser', async (userInfo) =>{
-    const res = await axios.post(`http://localhost:5000/register`, userInfo);
+    const res = await axios.post(`https://alemeno-course-server.vercel.app/register`, userInfo);
 
     return res.data;
 })
 
 export const loginUser = createAsyncThunk('auth/loginUser', async (userInfo) =>{
-    const res = await axios.post(`http://localhost:5000/login`, userInfo);
+    const res = await axios.post(`https://alemeno-course-server.vercel.app/login`, userInfo);
 
     return res.data;
 })

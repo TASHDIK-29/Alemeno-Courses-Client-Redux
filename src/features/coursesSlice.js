@@ -3,20 +3,20 @@ import axios from "axios";
 
 
 export const fetchCourses = createAsyncThunk('courses/fetchCourse', async (search = '') => {
-    const res = await axios.get(`http://localhost:5000/allCourse?search=${search}`);
+    const res = await axios.get(`https://alemeno-course-server.vercel.app/allCourse?search=${search}`);
 
     return res.data;
 })
 
 export const fetchCourseDetails = createAsyncThunk('courses/fetchCourseDetails', async (id) => {
-    const response = await axios.get(`http://localhost:5000/courses/${id}`);
+    const response = await axios.get(`https://alemeno-course-server.vercel.app/courses/${id}`);
     return response.data;
 });
 
 
 // Thunk for updating course likes
 export const updateCourseLikes = createAsyncThunk('courses/updateCourseLikes', async (courseId) => {
-    const response = await axios.patch(`http://localhost:5000/course/like/${courseId}`);
+    const response = await axios.patch(`https://alemeno-course-server.vercel.app/course/like/${courseId}`);
     return response.data;
   });
 

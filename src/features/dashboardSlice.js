@@ -2,7 +2,7 @@ import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 
 export const fetchEnrolledCourses = createAsyncThunk('dashboard/fetchEnrolledCourses', async (email) => {
-  const response = await axios.get(`http://localhost:5000/course/${email}`);
+  const response = await axios.get(`https://alemeno-course-server.vercel.app/course/${email}`);
   return response.data;
 });
 

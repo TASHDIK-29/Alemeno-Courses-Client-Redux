@@ -19,7 +19,7 @@ const EnrollCourses = () => {
     console.log(courses);
 
     const handleConfirm = async (id, name) => {
-        const res = await axios.patch('http://localhost:5000/courseComplete', { email: user.email, id });
+        const res = await axios.patch('https://alemeno-course-server.vercel.app/courseComplete', { email: user.email, id });
 
         console.log(res.data);
 
